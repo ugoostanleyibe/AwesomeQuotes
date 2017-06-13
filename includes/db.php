@@ -1,8 +1,8 @@
 <?php
 	if (!defined("DB_SERVER")) define("DB_SERVER", "localhost", true);
-	if (!defined("DB_USER")) define("DB_USER", "ugoostanleyibe", true);
-	if (!defined("DB_PASS")) define("DB_PASS", "#hpENVYdv7", true);
-	if (!defined("DB_NAME")) define("DB_NAME", "phpmysql", true);
+	if (!defined("DB_NAME")) define("DB_NAME", "awesomequotes", true);
+	if (!defined("DB_USER")) define("DB_USER", "someusername", true);
+	if (!defined("DB_PASS")) define("DB_PASS", "#pa55w0rd", true);
 
 	class DBMgr {
 		private $dbConnection;

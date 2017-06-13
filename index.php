@@ -6,8 +6,8 @@
 	$quotes = Quote::grabAll();
 	$numQuotes = count($quotes); $quotesHTMLPile = [];
 	$quoteAreaInstr = "Type In A Quote You Wish To Add Here...";
-	$numQuotesBadge = "<span class=\"badge\">{$numQuotes}</span>";
-	$pageHeader = Utils::centredElementHTML("<h1>Awesome Quotes {$numQuotesBadge}</h1>");
+	$numQuotesBadge = "<span class=\"badge\">${numQuotes}</span>";
+	$pageHeader = Utils::centredElementHTML("<h1>Awesome Quotes ${numQuotesBadge}</h1>");
 
 	foreach ($quotes as $quote) {
 		$quotesHTMLPile[] = Quote::panelHTML($quote->getText(), $quote->getID());
@@ -155,13 +155,13 @@ echo <<<pageHTML
 	<body>
 		<div class="container">
 			<div class="page-header">
-				{$pageHeader}
+				${pageHeader}
 			</div>
 			<div class="well well-sm">
 				<form id="quoteForm">
 					<div class="form-group">
 						<textarea id="quoteArea" class="form-control" name="quoteArea"
-						placeholder="{$quoteAreaInstr}" rows="3" maxlength="240"
+						placeholder="${quoteAreaInstr}" rows="3" maxlength="240"
 						spellcheck="true" required></textarea> <br>
 						<a id="saveQuote" href="">Save Quote</a>
 					</div>
@@ -171,7 +171,7 @@ echo <<<pageHTML
 				<!-- For All Notifications... -->
 			</div>
 			<div class="panel-group">
-				{$quotesHTML}
+				${quotesHTML}
 			</div>
 		</div>
 	</body>

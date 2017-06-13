@@ -24,7 +24,7 @@
 			$queryStr = "INSERT into quotes (text) ";
 			$this->text = ucwords(Utils::cleanString($this->text));
 			$perfectText = $dbMgr->cleanSQL($this->text);
-			$queryStr .= "VALUES ('{$perfectText}')";
+			$queryStr .= "VALUES ('${perfectText}')";
 			if (!($dbMgr->query($queryStr))) return false;
 			$this->id = $dbMgr->insertID(); return true;
 		}
@@ -34,8 +34,8 @@
 			$queryStr = "UPDATE quotes SET ";
 			$this->text = ucwords(Utils::cleanString($this->text));
 			$perfectText = $dbMgr->cleanSQL($this->text);
-			$queryStr .= "text = '{$perfectText}' ";
-			$queryStr .= "WHERE id = {$id}";
+			$queryStr .= "text = '${perfectText}' ";
+			$queryStr .= "WHERE id = ${id}";
 			$dbMgr->query($queryStr);
 			return ($dbMgr->affectedRows() == 1);
 		}
@@ -47,7 +47,7 @@
 		public function deleteFromDB() {
 			global $dbMgr; $id = $this->id;
 			$queryStr = "DELETE FROM quotes ";
-			$queryStr .= "WHERE id = {$id} LIMIT 1";
+			$queryStr .= "WHERE id = ${id} LIMIT 1";
 			$dbMgr->query($queryStr);
 			return ($dbMgr->affectedRows() == 1);
 		}
@@ -57,7 +57,7 @@
 		}
 
 		public static function grabByID($id=1) {
-			return Quote::grabByQuery("SELECT * FROM quotes WHERE id = {$id}")[0];
+			return Quote::grabByQuery("SELECT * FROM quotes WHERE id = ${id}")[0];
 		}
 
 		protected static function grabByQuery($queryStr) {
@@ -71,14 +71,14 @@
 		public static function panelHTML($quoteText, $quoteID) {
 			$quoteText = Utils::niceHTML($quoteText);
 			return "
-				<div id=\"quoteDiv{$quoteID}\" class=\"panel panel-default\">
-					<div id=\"quoteHeading{$quoteID}\" class=\"panel-heading\">
-						<h6>{$quoteID}<br><i class=\"fa fa-caret-down\"></i></h6>
+				<div id=\"quoteDiv${quoteID}\" class=\"panel panel-default\">
+					<div id=\"quoteHeading${quoteID}\" class=\"panel-heading\">
+						<h6>${quoteID}<br><i class=\"fa fa-caret-down\"></i></h6>
 					</div>
-					<div id=\"quoteBody{$quoteID}\" class=\"panel-body\">
-						<h3 id=\"quote{$quoteID}\">{$quoteText}</h3> <hr>
-						<a id=\"editQuote{$quoteID}\" href=\"\">Edit</a>&nbsp;&nbsp;&nbsp;
-						<a id=\"deleteQuote{$quoteID}\" href=\"\">Delete</a>
+					<div id=\"quoteBody${quoteID}\" class=\"panel-body\">
+						<h3 id=\"quote${quoteID}\">${quoteText}</h3> <hr>
+						<a id=\"editQuote${quoteID}\" href=\"\">Edit</a>&nbsp;&nbsp;&nbsp;
+						<a id=\"deleteQuote${quoteID}\" href=\"\">Delete</a>
 					</div>
 				</div>";
 		}
